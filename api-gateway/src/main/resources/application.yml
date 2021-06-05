@@ -8,10 +8,18 @@ spring:
     gateway:
       routes:
         - id : student-service
-          uri: http://localhost:8045
+          #uri: http://localhost:8045
+          uri: lb://STUDENT-SERVICE
           predicates:
             - Path=/student/**
         - id: cti-service
-          uri: http://localhost:8050
+          #uri: http://localhost:8050
+          uri: lb://CTI-SERVICE
           predicates:
             - Path=/cti/**
+eureka:
+  instance:
+    appname: ${spring.application.name}
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka
